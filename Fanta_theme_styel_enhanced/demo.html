@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fanta.css 0.2.0 — Demo</title>
+<link rel="stylesheet" href="fanta.css">
+<script src="fanta.js" defer></script>
+<style>
+  .demo-section { margin-bottom: var(--space-5); }
+  .swatch { width: 100%; height: 3rem; border-radius: var(--radius-sm); border: 1px solid var(--border-primary); }
+</style>
+</head>
+<body>
+<nav class="navbar">
+  <span class="navbar-brand text-gradient">Fanta.css</span>
+  <ul class="navbar-nav">
+    <li><a href="#" class="active">Components</a></li>
+    <li><a href="#">Utilities</a></li>
+    <li><a href="#">Docs</a></li>
+  </ul>
+</nav>
+
+<div class="container py-5">
+
+  <section class="demo-section">
+    <h1 class="text-gradient">Deep Grimoire</h1>
+    <p class="text-secondary mt-2">A dark-first theme with Bootstrap-shaped utilities, layered on top of the original fantasy type system.</p>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Buttons</h3>
+    <div class="d-flex flex-wrap gap-2">
+      <button class="btn btn-primary">Primary</button>
+      <button class="btn btn-secondary">Secondary</button>
+      <button class="btn btn-success">Success</button>
+      <button class="btn btn-warning">Warning</button>
+      <button class="btn btn-danger">Danger</button>
+      <button class="btn btn-info">Info</button>
+      <button class="btn btn-outline">Outline</button>
+      <button class="btn btn-ghost">Ghost</button>
+      <button class="btn btn-primary" disabled>Disabled</button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Badges &amp; alerts</h3>
+    <div class="d-flex gap-2 mb-3">
+      <span class="badge badge-primary">New</span>
+      <span class="badge badge-success">Shipped</span>
+      <span class="badge badge-warning">Beta</span>
+      <span class="badge badge-danger">Deprecated</span>
+      <span class="badge badge-info">Info</span>
+    </div>
+    <div class="alert alert-success">Quest saved successfully.</div>
+    <div class="alert alert-danger">The relic could not be forged.</div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">12-column grid</h3>
+    <div class="row mb-2">
+      <div class="col-4 card">col-4</div>
+      <div class="col-4 card">col-4</div>
+      <div class="col-4 card">col-4</div>
+    </div>
+    <div class="row">
+      <div class="col-8 card">col-8</div>
+      <div class="col-4 card">col-4</div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Cards</h3>
+    <div class="row">
+      <div class="col-6 card">
+        <div class="card-header">Spellbook Entry</div>
+        <p class="text-secondary">Cards inherit the surface + border + shadow tokens automatically.</p>
+        <div class="card-footer">Updated just now</div>
+      </div>
+      <div class="col-6 card">
+        <div class="d-flex align-items-center gap-2 mb-2">
+          <div class="spinner"></div>
+          <span>Casting…</span>
+        </div>
+        <div class="skeleton mb-2" style="height:0.9rem;width:80%"></div>
+        <div class="skeleton" style="height:0.9rem;width:60%"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Form</h3>
+    <div class="row">
+      <div class="col-6">
+        <div class="form-group">
+          <label for="name">Character name</label>
+          <input id="name" type="text" placeholder="Elowen Ashvale">
+        </div>
+        <div class="form-group">
+          <label for="class">Class</label>
+          <select id="class"><option>Ranger</option><option>Mage</option></select>
+        </div>
+        <button class="btn btn-primary">Create character</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Tooltip</h3>
+    <span class="tooltip" data-tooltip="Deals 12 arcane damage">
+      <button class="btn btn-outline">Hover: Fireball</button>
+    </span>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Extended color palette</h3>
+    <div class="d-flex flex-wrap gap-2">
+      <span class="badge bg-violet-600 text-slate-50">violet-600</span>
+      <span class="badge bg-teal-500 text-slate-50">teal-500</span>
+      <span class="badge bg-rose-500 text-slate-50">rose-500</span>
+      <span class="badge bg-amber-500 text-slate-900">amber-500</span>
+      <span class="badge bg-emerald-500 text-slate-50">emerald-500</span>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Dropdown, modal &amp; offcanvas</h3>
+    <div class="d-flex gap-2">
+      <div class="dropdown">
+        <button class="btn btn-outline" data-toggle="dropdown" data-target="#menu1">Options ▾</button>
+        <div class="dropdown-menu" id="menu1">
+          <button class="dropdown-item">Rename</button>
+          <button class="dropdown-item">Duplicate</button>
+          <div class="dropdown-divider"></div>
+          <button class="dropdown-item text-danger">Delete</button>
+        </div>
+      </div>
+      <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Open modal</button>
+      <button class="btn btn-secondary" data-toggle="offcanvas" data-target="#sidebar">Open sidebar</button>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Tabs</h3>
+    <ul class="nav-tabs mb-3">
+      <li><button class="nav-link active" data-toggle="tab" data-target="#pane1">Inventory</button></li>
+      <li><button class="nav-link" data-toggle="tab" data-target="#pane2">Quests</button></li>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="pane1">You are carrying 3 potions and a rusty sword.</div>
+      <div class="tab-pane" id="pane2">No active quests.</div>
+    </div>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Breadcrumb, pagination &amp; list group</h3>
+    <ul class="breadcrumb mb-3">
+      <li>World Map</li><li>Ashvale</li><li>Tavern</li>
+    </ul>
+    <ul class="pagination mb-3">
+      <li class="page-item"><span class="page-link">‹</span></li>
+      <li class="page-item active"><span class="page-link">1</span></li>
+      <li class="page-item"><span class="page-link">2</span></li>
+      <li class="page-item"><span class="page-link">3</span></li>
+      <li class="page-item"><span class="page-link">›</span></li>
+    </ul>
+    <ul class="list-group" style="max-width:320px">
+      <li class="list-group-item list-group-item-action">Elowen Ashvale — Ranger</li>
+      <li class="list-group-item list-group-item-action active">Bram Ironfoot — Warrior</li>
+      <li class="list-group-item list-group-item-action">Nyx — Mage</li>
+    </ul>
+  </section>
+
+  <section class="demo-section">
+    <h3 class="mb-3">Input group &amp; floating label</h3>
+    <div class="input-group mb-3" style="max-width:360px">
+      <span class="input-group-text">🔍</span>
+      <input type="text" placeholder="Search the archive…">
+    </div>
+    <div class="form-floating" style="max-width:360px">
+      <input type="text" id="floatEmail" placeholder=" ">
+      <label for="floatEmail">Email address</label>
+    </div>
+  </section>
+
+  <div class="toast">
+    <span class="badge badge-success">✓</span>
+    <span>Progress auto-saved</span>
+  </div>
+
+  <div class="modal" id="exampleModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="modal-title">Confirm quest</span>
+          <button class="modal-close" data-dismiss="modal">✕</button>
+        </div>
+        <div class="modal-body">Accept the quest "Retrieve the Sunken Crown"?</div>
+        <div class="modal-footer">
+          <button class="btn btn-ghost" data-dismiss="modal">Cancel</button>
+          <button class="btn btn-primary" data-dismiss="modal">Accept</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="offcanvas" id="sidebar">
+    <div class="offcanvas-header">
+      <span class="navbar-brand">Menu</span>
+      <button class="modal-close" data-dismiss="offcanvas">✕</button>
+    </div>
+    <div class="offcanvas-body">
+      <ul class="navbar-nav" style="flex-direction:column; align-items:flex-start; gap:var(--space-3)">
+        <li><a href="#">Character</a></li>
+        <li><a href="#">Inventory</a></li>
+        <li><a href="#">Settings</a></li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

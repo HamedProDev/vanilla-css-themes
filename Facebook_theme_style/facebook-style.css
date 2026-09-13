@@ -1,0 +1,257 @@
+/**
+* facebook-style.css
+* Version 0.1.0
+*
+* A Facebook-inspired theme: light grey feed background, white cards,
+* and Facebook's current brand blue as the single primary accent.
+*
+* Sourcing note: #0866FF is Facebook's current documented brand blue
+* (successor to the older #1877F2 / #4267B2 / #3B5998 blues used in past
+* redesigns — kept below as reference tokens for anyone matching an
+* older screenshot). Trademarked colors, referenced here for learning/
+* inspiration only — no logo or wordmark included, and this is not an
+* official Meta asset. Typeface is system-ui/Helvetica, matching
+* Facebook's own system-font approach on the web.
+*/
+
+:root {
+    /* ---- surfaces ---- */
+    --background-primary: #f0f2f5;   /* feed background */
+    --background-card: #ffffff;
+    --background-secondary: #e4e6eb;
+    --background-muted: #f0f2f5;
+    --background-inverse: #18191a;
+
+    /* ---- text ---- */
+    --color-primary: #050505;
+    --color-secondary: #65676b;
+    --color-tertiary: #8a8d91;
+    --color-link: #0866ff;
+
+    /* ---- brand blue (current + legacy reference tokens) ---- */
+    --brand-blue: #0866ff;
+    --brand-blue-hover: #0656d0;
+    --brand-blue-legacy-2019: #1877f2;
+    --brand-blue-legacy-2015: #4267b2;
+    --brand-blue-legacy-2004: #3b5998;
+    --brand-blue-bg: rgba(8, 102, 255, 0.08);
+
+    /* ---- semantic ---- */
+    --color-success: #31a24c;
+    --color-success-bg: rgba(49, 162, 76, 0.1);
+    --color-warning: #f7b928;
+    --color-warning-bg: rgba(247, 185, 40, 0.12);
+    --color-error: #e41e3f;
+    --color-error-bg: rgba(228, 30, 63, 0.1);
+    --color-like: var(--brand-blue);
+    --color-love: #f3425f;
+
+    /* ---- borders ---- */
+    --border-primary: #ced0d4;
+    --border-secondary: #e4e6eb;
+
+    /* ---- shape & elevation ---- */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-pill: 999px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.1);
+    --shadow-md: 0 2px 4px rgba(0,0,0,0.1);
+    --shadow-lg: 0 8px 24px rgba(0,0,0,0.16);
+
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 20px;
+    --space-5: 32px;
+
+    --font-body: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    --transition-base: 150ms ease;
+}
+
+/* ==========================================================================
+   Base
+   ========================================================================== */
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    background: var(--background-primary);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.34;
+}
+
+a { color: var(--color-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 { font-weight: 700; color: var(--color-primary); }
+
+/* ==========================================================================
+   Layout
+   ========================================================================== */
+
+.fb-shell {
+    max-width: 1160px;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 280px 1fr 320px;
+    gap: var(--space-4);
+    padding: var(--space-4) var(--space-3);
+}
+
+@media (max-width: 1000px) {
+    .fb-shell { grid-template-columns: 1fr; }
+    .fb-sidebar, .fb-right { display: none; }
+}
+
+/* ==========================================================================
+   Top nav
+   ========================================================================== */
+
+.fb-navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-2) var(--space-4);
+    background: var(--background-card);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 50;
+}
+.fb-navbar .brand { color: var(--brand-blue); font-size: 1.7rem; font-weight: 800; }
+.fb-navbar .search {
+    background: var(--background-secondary);
+    border-radius: var(--radius-pill);
+    padding: 8px 16px;
+    color: var(--color-secondary);
+    font-size: 0.9rem;
+    min-width: 240px;
+}
+.fb-navbar .icon-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--background-secondary);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--color-secondary);
+    cursor: pointer;
+    border: none;
+}
+.fb-navbar .icon-btn:hover { background: var(--border-primary); }
+
+/* ==========================================================================
+   Cards / post
+   ========================================================================== */
+
+.card {
+    background: var(--background-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-3);
+}
+
+.composer { display: flex; gap: var(--space-2); align-items: center; margin-bottom: var(--space-3); }
+.composer .avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--background-secondary); flex-shrink: 0; }
+.composer .input-pill {
+    flex: 1;
+    background: var(--background-secondary);
+    border-radius: var(--radius-pill);
+    padding: 10px 16px;
+    color: var(--color-tertiary);
+    font-size: 0.95rem;
+}
+
+.post { margin-bottom: var(--space-4); }
+.post-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-2); }
+.post-avatar { width: 40px; height: 40px; border-radius: 50%; background: var(--background-secondary); }
+.post-name { font-weight: 600; font-size: 0.95rem; }
+.post-meta { font-size: 0.78rem; color: var(--color-tertiary); }
+.post-body { font-size: 0.95rem; margin-bottom: var(--space-3); }
+.post-media { width: 100%; aspect-ratio: 16/9; background: var(--background-secondary); border-radius: var(--radius-sm); margin-bottom: var(--space-2); }
+
+.post-stats { display: flex; justify-content: space-between; color: var(--color-tertiary); font-size: 0.82rem; padding: var(--space-2) 0; border-bottom: 1px solid var(--border-secondary); }
+
+.post-buttons { display: flex; padding-top: var(--space-1); }
+.post-buttons button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 8px;
+    border-radius: var(--radius-sm);
+    color: var(--color-secondary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+.post-buttons button:hover { background: var(--background-secondary); }
+.post-buttons button.liked { color: var(--brand-blue); }
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: background var(--transition-base);
+}
+
+.btn-primary { background: var(--brand-blue); color: #fff; }
+.btn-primary:hover { background: var(--brand-blue-hover); }
+
+.btn-secondary { background: var(--background-secondary); color: var(--color-primary); }
+.btn-secondary:hover { background: var(--border-primary); }
+
+.btn-outline { background: transparent; border-color: var(--border-primary); color: var(--color-primary); }
+.btn-outline:hover { background: var(--background-secondary); }
+
+.btn-pill { border-radius: var(--radius-pill); }
+
+/* ==========================================================================
+   Badges & alerts
+   ========================================================================== */
+
+.badge { display: inline-flex; align-items: center; padding: 2px 8px; font-size: 0.72rem; font-weight: 700; border-radius: var(--radius-pill); background: var(--color-error); color: #fff; }
+.alert { padding: var(--space-3); border-radius: var(--radius-md); background: var(--background-card); box-shadow: var(--shadow-sm); margin-bottom: var(--space-3); }
+.alert-success { background: var(--color-success-bg); color: var(--color-success); }
+.alert-warning { background: var(--color-warning-bg); color: #8a6d1a; }
+.alert-danger { background: var(--color-error-bg); color: var(--color-error); }
+
+/* ==========================================================================
+   Sidebar nav item
+   ========================================================================== */
+
+.side-item {
+    display: flex; align-items: center; gap: var(--space-3);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    font-weight: 500;
+    cursor: pointer;
+}
+.side-item:hover { background: var(--background-secondary); }
+.side-item .icon { width: 36px; height: 36px; border-radius: 50%; background: var(--background-secondary); }
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+
+.text-muted { color: var(--color-tertiary); }
+.text-center { text-align: center; }
+.d-flex { display: flex; }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.align-items-center { align-items: center; }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>claude-style.css — Demo</title>
+<link rel="stylesheet" href="claude-style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <span class="navbar-brand">claylight</span>
+  <ul class="navbar-nav">
+    <li><a href="#" class="active">Product</a></li>
+    <li><a href="#">Research</a></li>
+    <li><a href="#">Docs</a></li>
+  </ul>
+</nav>
+
+<div class="container section">
+  <span class="eyebrow">Design system</span>
+  <h1>A warm, editorial theme<br>for calm, technical products.</h1>
+  <p class="lede mt-3">Dark ink on a cream page, one terracotta accent, and just enough
+  structure to stay out of the way of the words.</p>
+  <div class="d-flex gap-2 mt-4">
+    <button class="btn btn-primary">Get started</button>
+    <button class="btn btn-outline">Read the docs</button>
+  </div>
+</div>
+
+<div class="container section">
+  <h3 class="mb-4">Cards</h3>
+  <div class="row">
+    <div class="col-4 card card-feature">
+      <div class="card-header">Fast</div>
+      <p>Built on system fonts and a small token set, so pages stay light and load quickly.</p>
+    </div>
+    <div class="col-4 card">
+      <div class="card-header">Calm</div>
+      <p>Low-contrast shadows and a single accent color keep attention on the content.</p>
+    </div>
+    <div class="col-4 card">
+      <div class="card-header">Legible</div>
+      <p>65-character line lengths and generous line-height throughout.</p>
+    </div>
+  </div>
+</div>
+
+<div class="container section">
+  <h3 class="mb-3">Badges &amp; alerts</h3>
+  <div class="d-flex gap-2 mb-4">
+    <span class="badge badge-orange">Primary</span>
+    <span class="badge badge-blue">Info</span>
+    <span class="badge badge-green">Stable</span>
+  </div>
+  <div class="alert alert-success">Deployed successfully.</div>
+  <div class="alert alert-danger">Build failed — check the logs.</div>
+</div>
+
+<div class="container section">
+  <h3 class="mb-3">Form</h3>
+  <div class="row">
+    <div class="col-6">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" placeholder="you@example.com">
+      </div>
+      <div class="form-group">
+        <label for="msg">Message</label>
+        <textarea id="msg" rows="3" placeholder="How can we help?"></textarea>
+      </div>
+      <button class="btn btn-primary">Send</button>
+    </div>
+  </div>
+</div>
+
+<div class="container section">
+  <h3 class="mb-3">Code</h3>
+  <pre><code>const client = new Anthropic();
+const msg = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 1000,
+  messages: [{ role: "user", content: "Hello" }]
+});</code></pre>
+</div>
+
+<footer>
+  <div class="container">
+    claude-style.css — an independent, brand-inspired theme. Not an official Anthropic asset.
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,414 @@
+/**
+* claude-style.css
+* Version 0.1.0 — "Claylight"
+*
+* A warm, editorial theme inspired by Anthropic's public brand palette:
+* dark ink on a cream page, a terracotta accent, and calm blue/green
+* secondary accents. Built as a companion to fanta.css, using the same
+* utility conventions (spacing scale, .btn-*, .card, .badge-*, etc.) so
+* the two can be swapped by only changing the stylesheet link.
+*
+* Honesty about sourcing:
+* - Colors below match Anthropic's publicly documented brand hex values
+*   (dark #141413, light #faf9f5, mid-gray #b0aea5, light-gray #e8e6dc,
+*   orange #d97757, blue #6a9bcc, green #788c5d).
+* - The real brand typefaces (Styrene by Commercial Type, Tiempos by
+*   Klim) are commercially licensed and not embeddable here. This file
+*   uses Fraunces (a warm, slightly idiosyncratic serif) and Inter (a
+*   clean technical sans) as open-source stand-ins with a similar
+*   character — swap the @import if you have licenses for the originals.
+* - No logo, wordmark, or Anthropic code/copy is reproduced here — this
+*   is a palette-and-type system only.
+*
+* Sections
+* 0. Design tokens
+* 1. Reset & base
+* 2. Typography
+* 3. Layout
+* 4. Buttons
+* 5. Badges & alerts
+* 6. Cards
+* 7. Forms
+* 8. Navbar & footer
+* 9. Code blocks
+* 10. Utilities
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@400;500;600;700&display=swap');
+
+/* ==========================================================================
+   0. DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+    /* ---- surfaces ---- */
+    --background-primary: #faf9f5;   /* Anthropic "light" */
+    --background-secondary: #ffffff;
+    --background-tertiary: #f3f1ea;
+    --background-muted: #e8e6dc;     /* Anthropic "light gray" */
+    --background-inverse: #141413;   /* Anthropic "dark" */
+
+    /* ---- text ---- */
+    --color-primary: #141413;        /* Anthropic "dark" */
+    --color-secondary: #57554d;
+    --color-tertiary: #8a877c;
+    --color-muted: #b0aea5;          /* Anthropic "mid gray" */
+    --color-inverse: #faf9f5;
+
+    /* ---- accents (Anthropic's documented accent trio) ---- */
+    --accent-orange: #d97757;
+    --accent-orange-bg: rgba(217, 119, 87, 0.12);
+    --accent-blue: #6a9bcc;
+    --accent-blue-bg: rgba(106, 155, 204, 0.12);
+    --accent-green: #788c5d;
+    --accent-green-bg: rgba(120, 140, 93, 0.12);
+
+    --color-link: #b35d3f;
+    --color-link-hover: #954a30;
+    --color-link-transparent: rgba(217, 119, 87, 0.1);
+
+    /* ---- semantic ---- */
+    --color-success: var(--accent-green);
+    --color-success-bg: var(--accent-green-bg);
+    --color-warning: #b8863f;
+    --color-warning-bg: rgba(184, 134, 63, 0.12);
+    --color-error: #b3492f;
+    --color-error-bg: rgba(179, 73, 47, 0.12);
+    --color-info: var(--accent-blue);
+    --color-info-bg: var(--accent-blue-bg);
+
+    /* ---- borders ---- */
+    --border-primary: #e8e6dc;
+    --border-secondary: #d9d6c9;
+    --border-highlight: #b0aea5;
+
+    /* ---- shadows: soft, warm, low-contrast (no cool grey drop shadows) ---- */
+    --shadow-sm: 0 1px 2px rgba(20, 20, 19, 0.06);
+    --shadow-md: 0 6px 20px rgba(20, 20, 19, 0.08);
+    --shadow-lg: 0 16px 40px rgba(20, 20, 19, 0.12);
+
+    /* ---- radius: soft but not pill-everything ---- */
+    --radius-sm: 0.375rem;
+    --radius-md: 0.625rem;
+    --radius-lg: 1rem;
+    --radius-pill: 999px;
+
+    /* ---- spacing ---- */
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 1rem;
+    --space-4: 1.5rem;
+    --space-5: 3rem;
+
+    /* ---- type ---- */
+    --font-display: "Fraunces", Georgia, serif;
+    --font-body: "Inter", -apple-system, "Segoe UI", sans-serif;
+    --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+    --transition-base: 180ms ease;
+    --focus-ring: 0 0 0 3px rgba(217, 119, 87, 0.35);
+}
+
+html[data-theme="dark"] {
+    --background-primary: #141413;
+    --background-secondary: #1c1b19;
+    --background-tertiary: #232220;
+    --background-muted: #2b2a26;
+    --background-inverse: #faf9f5;
+
+    --color-primary: #f5f3ec;
+    --color-secondary: #c9c6ba;
+    --color-tertiary: #97948a;
+    --color-muted: #706d63;
+    --color-inverse: #141413;
+
+    --color-link: #e2926f;
+    --color-link-hover: #edac8c;
+    --border-primary: #2b2a26;
+    --border-secondary: #37352f;
+    --border-highlight: #706d63;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 6px 20px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   1. RESET & BASE
+   ========================================================================== */
+
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--background-primary);
+    color: var(--color-primary);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    transition: background-color var(--transition-base), color var(--transition-base);
+}
+
+::selection { background: var(--accent-orange-bg); color: var(--color-primary); }
+
+/* ==========================================================================
+   2. TYPOGRAPHY
+   ========================================================================== */
+
+h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    color: var(--color-primary);
+}
+
+h1 { font-size: 2.75rem; line-height: 1.1; font-weight: 400; }
+h2 { font-size: 2rem; line-height: 1.2; }
+h3 { font-size: 1.5rem; line-height: 1.3; }
+h4 { font-size: 1.15rem; line-height: 1.4; }
+
+p { max-width: 65ch; color: var(--color-secondary); }
+p.lede { font-size: 1.2rem; color: var(--color-primary); }
+
+a { color: var(--color-link); text-decoration: none; border-bottom: 1px solid transparent; }
+a:hover { color: var(--color-link-hover); border-bottom-color: currentColor; }
+
+.text-gradient {
+    background-image: linear-gradient(120deg, var(--accent-orange), var(--accent-blue));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.eyebrow {
+    display: inline-block;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent-orange);
+    margin-bottom: var(--space-2);
+}
+
+/* ==========================================================================
+   3. LAYOUT
+   ========================================================================== */
+
+.container {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+}
+
+.section { padding-block: var(--space-5); }
+
+.row { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--space-4); }
+.col-4 { grid-column: span 4; }
+.col-6 { grid-column: span 6; }
+.col-8 { grid-column: span 8; }
+.col-12 { grid-column: span 12; }
+
+@media (max-width: 768px) {
+    .row { display: flex; flex-direction: column; }
+    h1 { font-size: 2rem; }
+}
+
+.d-flex { display: flex; }
+.gap-2 { gap: var(--space-2); }
+.gap-3 { gap: var(--space-3); }
+.align-items-center { align-items: center; }
+.justify-content-between { justify-content: space-between; }
+
+/* ==========================================================================
+   4. BUTTONS
+   ========================================================================== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-body);
+    font-weight: 500;
+    font-size: 0.95rem;
+    padding: 0.65rem 1.4rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.btn-primary {
+    background: var(--accent-orange);
+    color: #fff;
+}
+.btn-primary:hover { background: var(--color-link-hover); transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.btn-outline {
+    background: transparent;
+    color: var(--color-primary);
+    border-color: var(--border-secondary);
+}
+.btn-outline:hover { border-color: var(--color-primary); background: var(--background-tertiary); }
+
+.btn-ghost {
+    background: transparent;
+    color: var(--color-secondary);
+}
+.btn-ghost:hover { color: var(--color-primary); background: var(--background-tertiary); }
+
+.btn-sm { padding: 0.4rem 1rem; font-size: 0.85rem; }
+.btn-lg { padding: 0.85rem 1.9rem; font-size: 1.05rem; }
+
+/* ==========================================================================
+   5. BADGES & ALERTS
+   ========================================================================== */
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.15rem 0.65rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    background: var(--background-muted);
+    color: var(--color-secondary);
+}
+
+.badge-orange { background: var(--accent-orange-bg); color: var(--accent-orange); }
+.badge-blue   { background: var(--accent-blue-bg); color: var(--accent-blue); }
+.badge-green  { background: var(--accent-green-bg); color: var(--accent-green); }
+
+.alert {
+    display: flex;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-primary);
+    background: var(--background-tertiary);
+    margin-bottom: var(--space-3);
+}
+.alert-success { background: var(--color-success-bg); border-color: rgba(120,140,93,0.3); color: var(--color-success); }
+.alert-warning { background: var(--color-warning-bg); border-color: rgba(184,134,63,0.3); color: var(--color-warning); }
+.alert-danger  { background: var(--color-error-bg); border-color: rgba(179,73,47,0.3); color: var(--color-error); }
+.alert-info    { background: var(--color-info-bg); border-color: rgba(106,155,204,0.3); color: var(--color-info); }
+
+/* ==========================================================================
+   6. CARDS
+   ========================================================================== */
+
+.card {
+    background: var(--background-secondary);
+    border: 1px solid var(--border-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-4);
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow var(--transition-base), transform var(--transition-base);
+}
+.card:hover { box-shadow: var(--shadow-md); }
+
+.card-feature {
+    border-left: 3px solid var(--accent-orange);
+}
+
+.card-header { font-family: var(--font-display); font-size: 1.25rem; margin-bottom: var(--space-2); }
+.card-footer { margin-top: var(--space-3); padding-top: var(--space-2); border-top: 1px solid var(--border-primary); color: var(--color-tertiary); font-size: 0.85rem; }
+
+/* ==========================================================================
+   7. FORMS
+   ========================================================================== */
+
+label { display: block; font-weight: 500; margin-bottom: var(--space-1); font-size: 0.9rem; }
+
+input, textarea, select {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--background-secondary);
+    border: 1px solid var(--border-secondary);
+    border-radius: var(--radius-sm);
+    color: var(--color-primary);
+    outline: none;
+    transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--accent-orange);
+    box-shadow: var(--focus-ring);
+}
+
+input::placeholder, textarea::placeholder { color: var(--color-tertiary); }
+
+.form-group { margin-bottom: var(--space-3); }
+
+/* ==========================================================================
+   8. NAVBAR & FOOTER
+   ========================================================================== */
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    border-bottom: 1px solid var(--border-primary);
+    background: var(--background-primary);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar-brand { font-family: var(--font-display); font-size: 1.3rem; }
+
+.navbar-nav {
+    display: flex;
+    gap: var(--space-4);
+    list-style: none;
+}
+.navbar-nav a { color: var(--color-secondary); font-weight: 500; font-size: 0.9rem; }
+.navbar-nav a:hover, .navbar-nav a.active { color: var(--color-primary); }
+
+footer {
+    border-top: 1px solid var(--border-primary);
+    padding: var(--space-5) var(--space-4);
+    color: var(--color-tertiary);
+    font-size: 0.85rem;
+}
+
+/* ==========================================================================
+   9. CODE BLOCKS
+   ========================================================================== */
+
+code {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--background-muted);
+    padding: 0.15rem 0.4rem;
+    border-radius: var(--radius-sm);
+    color: var(--accent-orange);
+}
+
+pre {
+    font-family: var(--font-mono);
+    background: var(--background-inverse);
+    color: var(--color-inverse);
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    line-height: 1.5;
+}
+pre code { background: none; color: inherit; padding: 0; }
+
+/* ==========================================================================
+   10. UTILITIES
+   ========================================================================== */
+
+.text-muted { color: var(--color-tertiary); }
+.text-center { text-align: center; }
+.rounded-lg { border-radius: var(--radius-lg); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.mt-3 { margin-top: var(--space-3); }
+.mt-4 { margin-top: var(--space-4); }
+.mb-3 { margin-bottom: var(--space-3); }
+.mb-4 { margin-bottom: var(--space-4); }
